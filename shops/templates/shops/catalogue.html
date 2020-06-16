@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Our Partners</h1>
+{% for shop in shops %}
+<h1><a href="{% url 'shops:view_shop' shop.slug %}">{{shop.name}}</a></h1>
+{% endfor %}
+{% endblock %}

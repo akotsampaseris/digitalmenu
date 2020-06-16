@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{shop.name}}</h1>
+<a class="btn btn-primary" href="{% url 'shops:edit_shop' shop.slug %}">Επεξεργασία</a>
+<a class="btn btn-danger" href="{% url 'shops:delete_shop' shop.slug %}">Διαγραφή</a>
+{% endblock %}

@@ -6,5 +6,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # Custom Apps
     path('', include('pages.urls')),
-    path('user/', include('user.urls')),
+    path('users/', include('users.urls')),
+    path('shops/', include('shops.urls')),
 ]
