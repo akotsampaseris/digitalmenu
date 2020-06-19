@@ -19,18 +19,28 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    ## Django Apps ##
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    ## Third-Party Apps ##
+    'corsheaders',
+    'rest_framework',
+    'graphene_django',
+    'django_filters',
+    ## Custom Apps ##
+    'frontend',
     'pages',
     'users',
     'shops',
+    'menus',
 ]
 
 MIDDLEWARE = [
+    ## Django Middleware ##
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -38,9 +48,16 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    ## Third-Party Middleware ##
+    'corsheaders.middleware.CorsMiddleware',
+    ## Custom Middleware ###
 ]
 
 ROOT_URLCONF = 'digitalmenu.urls'
+
+GRAPHENE = {
+    'SCHEMA': 'digitalmenu.schema.schema'
+}
 
 TEMPLATES = [
     {
@@ -109,3 +126,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+CORS_ORIGIN_WHITELIST = (
+    'https://localhost:8080',
+)

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <!-- Meta - Start -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Digital Menu | Καλως ήρθατε στην ψηφιακή παραγγελία!</title>
+    <!-- Meta -  End  -->
+
+    <!-- Links - Start -->
+    <link rel="icon" href="https://i.dlpng.com/static/png/4538460-serve-food-icon-of-colored-outline-style-available-in-svg-png-serve-food-png-256_256_preview.webp">
+    {% include 'inc/bootstrap_css.html' %}
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <!-- Links -  End  -->
+  </head>
+  <body>
+    <div class="wrapper bg-white">
+      <!-- NavBar - Start -->
+      {% include 'inc/navbar.html' %}
+      <!-- NavBar -  End  -->
+
+      <!-- Main Content - Start -->
+      <main role="main" class="container p-4" style="margin-bottom: 384px">
+        <div id="app"></div>
+      </main>
+      <!-- Main Content -  End  -->
+
+      <!-- Footer - Start -->
+      {% include 'inc/footer.html' %}
+      <!-- Footer -  End  -->
+
+      <!-- Optional JavaScript - Start -->
+      {% include 'inc/bootstrap_js.html' %}
+      <!-- Optional JavaScript -  End  -->
+    </div>
+  </body>
+  {% load static %}
+  <script src="{% static "frontend/main.js" %}"></script>
+</html>
