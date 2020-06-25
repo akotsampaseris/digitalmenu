@@ -1,26 +1,43 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { render } from "react-dom";
+import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
-import ApolloClient from "apollo-boost";
-import { ApolloProvider } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
+import { ApolloProvider, useQuery, useMutation } from "@apollo/react-hooks";
+import client from '../client';
 
-const client = new ApolloClient({
-  uri: 'http://localhost:8000/api/',
-});
+import { Provider } from 'react-redux';
+import store from '../store';
+
+// Layout Import //
+import Header from './layout/Header';
+
+// Pages Import //
+import Home from './pages/Home';
+
+// Shops Import //
+import Catalogue from './shops/Catalogue';
+
 
 class App extends Component {
   render() {
     return (
-    <ApolloProvider client={client}>
-      <div>
-        <h2>My first Apollo app 🚀</h2>
-      </div>
-    </ApolloProvider>
+    <Provider store={store}>
+      <ApolloProvider client={client}>
+        <Router>
+          <Fragment>
+          <Header />
+          <div className="container">
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/catalogue" component={Catalogue} />
+          </Switch>
+          </div>
+          </Fragment>
+        </Router>
+      </ApolloProvider>
+    </Provider>
     );
   }
 }
-
-export default App;
 
 render(<App />, document.getElementById("app"));

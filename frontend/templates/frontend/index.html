@@ -18,17 +18,15 @@
   <body>
     <div class="wrapper bg-white">
       <!-- NavBar - Start -->
-      {% include 'inc/navbar.html' %}
       <!-- NavBar -  End  -->
 
       <!-- Main Content - Start -->
-      <main role="main" class="container p-4" style="margin-bottom: 384px">
+      <main role="main" style="margin-bottom: 384px">
         <div id="app"></div>
       </main>
       <!-- Main Content -  End  -->
 
       <!-- Footer - Start -->
-      {% include 'inc/footer.html' %}
       <!-- Footer -  End  -->
 
       <!-- Optional JavaScript - Start -->
@@ -37,5 +35,5 @@
     </div>
   </body>
   {% load static %}
-  <script src="{% static "frontend/main.js" %}"></script>
+  <script src="{% static 'frontend/main.js' %}"></script>
 </html>

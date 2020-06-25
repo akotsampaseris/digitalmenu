@@ -10,7 +10,8 @@ urlpatterns = [
     path('api/', csrf_exempt(GraphQLView.as_view())),
     # Custom Apps
     path('', include('frontend.urls')),
-    path('', include('pages.urls')),
-    path('shops/', include('shops.urls')),
-    path('menus/', include('menus.urls')),
 ]
+"""
+path('', include('pages.urls')),
+path('shops/', include('shops.urls')),
+path('menus/', include('menus.urls')),"""
