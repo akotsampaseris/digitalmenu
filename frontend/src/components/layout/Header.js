@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 
-export class Header extends Component {
+class Header extends Component {
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-info sticky-top">
@@ -15,7 +14,10 @@ export class Header extends Component {
           </button>
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <Link className="nav-item nav-link text-white" to="/about">About</Link>
             <Link className="nav-item nav-link text-white" to="/catalogue">Shops</Link>
+            <Link className="nav-item nav-link text-white" to="/services">Services</Link>
+            <Link className="nav-item nav-link text-white" to="/contact">Contact</Link>
             <Link className="nav-item nav-link text-white" to="/login">Login</Link>
           </div>
         </div>
