@@ -3,7 +3,6 @@ import gql from 'graphql-tag';
 
 
 // EXPORT MUTATIONS
-
 // // CREATE SHOP MUTATION
 export const CREATE_SHOP = gql`
 mutation createShop(

@@ -24,8 +24,8 @@ function UpdateShopForm(props) {
         setTimeout(() => {
           props.updateShop({
             variables: {
+              slug: props.shop.slug,
               name: values._name,
-              slug: values._slug,
               category: values._category,
               location: values._location,
               city: values._city,

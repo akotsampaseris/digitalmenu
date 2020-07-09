@@ -88,7 +88,7 @@ class DeleteShopMutation(graphene.Mutation):
         return DeleteShopMutation(shop=shop)
 
 
-class UnDeleteShopMutation(graphene.Mutation):
+class UndeleteShopMutation(graphene.Mutation):
     class Arguments:
         slug = graphene.String(required=True)
 
@@ -100,11 +100,11 @@ class UnDeleteShopMutation(graphene.Mutation):
         #shop.slug = slug.replace('_deleted', '')
         shop.save()
 
-        return UnDeleteShopMutation(shop=shop)
+        return UndeleteShopMutation(shop=shop)
 
 
 class Mutation(graphene.ObjectType):
     create_shop = CreateShopMutation.Field()
     update_shop = UpdateShopMutation.Field()
     delete_shop = DeleteShopMutation.Field()
-    undelete_shop = UnDeleteShopMutation.Field()
+    undelete_shop = UndeleteShopMutation.Field()

@@ -1,4 +1,5 @@
 import os
+from datetime import timedelta
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -15,7 +16,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -31,6 +31,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'graphene_django',
     'django_filters',
+    'graphql_jwt',
+    'graphql_jwt.refresh_token.apps.RefreshTokenConfig',
     ## Custom Apps ##
     'frontend',
     'pages',
@@ -53,10 +55,26 @@ MIDDLEWARE = [
     ## Custom Middleware ###
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'graphql_jwt.backends.JSONWebTokenBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 ROOT_URLCONF = 'digitalmenu.urls'
 
 GRAPHENE = {
-    'SCHEMA': 'digitalmenu.schema.schema'
+    'SCHEMA': 'digitalmenu.schema.schema',
+    'MIDDLEWARE': [
+        'graphql_jwt.middleware.JSONWebTokenMiddleware',
+    ],
+}
+
+GRAPHQL_JWT = {
+    'JWT_ALLOW_ARGUMENT': True,
+    'JWT_VERIFY_EXPIRATION': True,
+    'JWT_LONG_RUNNING_REFRESH_TOKEN': True,
+    'JWT_EXPIRATION_DELTA': timedelta(minutes=15),
+    'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=7),
 }
 
 TEMPLATES = [
@@ -88,6 +106,8 @@ DATABASES = {
     }
 }
 
+# AUTH USER MODEL
+AUTH_USER_MODEL = 'users.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

@@ -4,8 +4,21 @@ import { Link, withRouter } from 'react-router-dom';
 
 // IMPORT FORM FUNCTIONALITY
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
 // DEFINE COMPONENTS
+// // VALIDATION SCHEMA
+const CreateShopSchema = Yup.object().shape({
+    _name: Yup.string()
+          .min(2, 'Too short!')
+          .max(50, 'Too long!')
+          .required('Required!'),
+    _slug: Yup.string()
+          .min(2, 'Too short!')
+          .max(50, 'Too long!')
+          .required('Required!')
+})
+
 // // CREATE SHOP FORM
 function CreateShopForm(props){
   return(
@@ -20,6 +33,7 @@ function CreateShopForm(props){
           _address2: '',
           _postCode: ''
       }}
+      validationSchema={CreateShopSchema}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
           props.createShop({
@@ -39,7 +53,7 @@ function CreateShopForm(props){
         }, 400);
       }}
       >
-      {({ isSubmitting }) => (
+      {({ isSubmitting, errors, touched }) => (
         <Form>
           <table>
             <tbody>
@@ -49,6 +63,11 @@ function CreateShopForm(props){
                 </td>
                 <td>
                   <Field type="text" name="_slug" placeholder="Slug"/>
+                  { errors._slug && touched._slug ? (
+                    <div className="text-danger">
+                      <small>{errors._slug}</small>
+                    </div>
+                  ) : null }
                 </td>
               </tr>
               <tr>
@@ -57,54 +76,11 @@ function CreateShopForm(props){
                 </td>
                 <td>
                   <Field type="text" name="_name" placeholder="Name" />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                <label>Category</label>
-                </td>
-                <td>
-                  <Field type="text" name="_category" placeholder="Category" />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                <label>Location</label>
-                </td>
-                <td>
-                  <Field type="text" name="_location" placeholder="Location" />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                <label>City</label>
-                </td>
-                <td>
-                  <Field type="text" name="_city" placeholder="City" />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                <label>Address 1</label>
-                </td>
-                <td>
-                  <Field type="text" name="_address1" placeholder="Address 1" />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                <label>Address 2</label>
-                </td>
-                <td>
-                  <Field type="text" name="_address2" placeholder="Address 2" />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                <label>Post Code</label>
-                </td>
-                <td>
-                  <Field type="text" name="_postCode" placeholder="Post Code" />
+                  { errors._name && touched._name ?(
+                    <div className="text-danger">
+                      <small>{errors._name}</small>
+                    </div>
+                  ) : null }
                 </td>
               </tr>
             </tbody>
