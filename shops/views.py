@@ -12,6 +12,7 @@ def catalogue(request):
     context = {
         "shops": shops
     }
+    
     return render(request, 'shops/catalogue.html', context)
 
 

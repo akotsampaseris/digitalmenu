@@ -1,6 +1,5 @@
 ### ReactJS ###
 frontend
-frontend/node_modules
 
 ### Django ###
 *.log
