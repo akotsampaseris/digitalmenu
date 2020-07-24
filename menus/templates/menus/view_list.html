@@ -1,0 +1,13 @@
+{%extends 'base.html' %}
+
+{% block content %}
+<h2>{{shop.name}}</h2>
+<hr>
+{% if menus %}
+  {% for menu in menus %}
+    <a href="{% url 'menus:view' shop.slug menu.id %}">{{ menu.name }}</a>
+  {% endfor %}
+{% else %}
+  <p>There are no menus for this store.</p>
+{% endif %}
+{% endblock %}

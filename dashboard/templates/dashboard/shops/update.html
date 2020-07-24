@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="w-50 mx-auto">
+  <div class="d-flex">
+    <h2 class="d-inline">Update Shop</h2>
+    <a class="d-inline btn btn-primary ml-auto" href="{% url 'dashboard:view_shops' %}">View shops</a>
+  </div>
+  <hr>
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <a class="nav-item nav-link active" id="nav-main-tab" data-toggle="tab" href="#nav-main" role="tab" aria-controls="nav-main" aria-selected="true">Info</a>
+      <a class="nav-item nav-link" id="nav-address-tab" data-toggle="tab" href="#nav-address" role="tab" aria-controls="nav-address" aria-selected="false">Address</a>
+      <a class="nav-item nav-link" id="nav-web-tab" data-toggle="tab" href="#nav-web" role="tab" aria-controls="nav-web" aria-selected="false">Web</a>
+    </div>
+  </nav>
+  <br>
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-main" role="tabpanel" aria-labelledby="nav-main-tab">
+      <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="form_id" value="main-info">
+        {{ main_form | crispy }}
+        <input type="submit" class="btn btn-primary" value="Save changes">
+      </form>
+    </div>
+    <div class="tab-pane fade" id="nav-web" role="tabpanel" aria-labelledby="nav-web-tab">
+      <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="form_id" value="web-info">
+        {{ web_form | crispy}}
+        <input type="submit" class="btn btn-primary" value="Save changes">
+      </form>
+    </div>
+    <div class="tab-pane fade" id="nav-address" role="tabpanel" aria-labelledby="nav-address-tab">
+      <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="form_id" value="address-info">
+        {{ address_form | crispy}}
+        <input type="submit" class="btn btn-primary" value="Save changes">
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="w-50 mx-auto">
+  <h3>Create menu category</h3>
+  <hr>
+  <form method="post">
+    {% csrf_token %}
+    {{ form | crispy }}
+    <input type="submit" class="btn btn-primary" value="Δημιουργία">
+  </form>
+</div>
+
+{% endblock %}

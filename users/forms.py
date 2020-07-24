@@ -1,29 +1,24 @@
-from django.conf import settings
 from django import forms
-from graphene_django.forms.mutation import DjangoModelFormMutation
 
 from .models import User
 
-class LoginForm(forms.ModelForm):
-    password=forms.CharField(widget=forms.PasswordInput())
-    class Meta:
-        model = User
-        fields = ('email', 'password')
+class LoginForm(forms.Form):
+    email=forms.EmailField(required=True)
+    password=forms.CharField(widget=forms.PasswordInput(), required=True)
 
 
 class RegisterForm(forms.ModelForm):
-    password=forms.CharField(widget=forms.PasswordInput())
-    confirm_password=forms.CharField(widget=forms.PasswordInput())
+    email=forms.EmailField(required=True)
+    password=forms.CharField(widget=forms.PasswordInput(), required=True)
+    confirm_password=forms.CharField(widget=forms.PasswordInput(), required=True)
     class Meta:
         model = User
-        fields = ('email', 'password')
+        fields = ['email', 'password']
 
-    def clean(self):
-        cleaned_data = super(RegisterForm, self).clean()
-        password = cleaned_data.get("password")
-        confirm_password = cleaned_data.get("confirm_password")
 
-        if password != confirm_password:
-            raise forms.ValidationError(
-                "password and confirm_password does not match"
-            )
+class EditUserForm(forms.ModelForm):
+    email=forms.EmailField()
+    password=forms.CharField(widget=forms.PasswordInput())
+    class Meta:
+        model = User
+        fields = ['email', 'password']

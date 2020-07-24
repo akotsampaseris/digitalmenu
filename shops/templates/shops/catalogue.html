@@ -1,8 +1,32 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Our Partners</h1>
-{% for shop in shops %}
-<h1><a href="{% url 'shops:view_shop' shop.slug %}">{{shop.name}}</a></h1>
-{% endfor %}
+<div class="text-center">
+  <ul class="list-inline">
+    <div class="row">
+      <div class="col mx-auto" style="width: 80%">
+      {% for shop in shops %}
+        <li class="list-inline-item">
+          <div class="col">
+            <a href="{% url 'shops:view' shop.slug %}">
+              <div class="card d-flex bg-primary" style="width:200px;height:200px">
+                <img src="https://kalamiabeachbar.gr/wp-content/uploads/2018/01/logo-e1508414306704.png"
+                   class="img-fluid my-auto" width="200px" height="200px"
+                   alt="{{shop.name}}">
+              </div>
+            </a>
+          </div>
+        </li>
+      {% if forloop.counter|divisibleby:3 %}
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col mx-auto" style="width: 80%">
+      {% endif %}
+      {% endfor %}
+      </div>
+    </div>
+  </ul>
+</div>
 {% endblock %}

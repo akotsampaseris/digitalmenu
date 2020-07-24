@@ -1,13 +1,26 @@
 from django import forms
 
-from .models import Shop
+from .models import Shop, ShopWebInfo, ShopAddressInfo
 
-class ShopCreateForm(forms.ModelForm):
+class ShopForm(forms.ModelForm):
     class Meta:
         model = Shop
-        fields = "__all__"
+        fields = '__all__'
+        widgets = {
+            'owner': forms.HiddenInput(),
+            'is_active': forms.HiddenInput()
+            }
 
-class ShopEditForm(forms.ModelForm):
+
+class ShopWebInfoForm(forms.ModelForm):
     class Meta:
-        model = Shop
-        fields = "__all__"
+        model = ShopWebInfo
+        fields = '__all__'
+        widgets = {'shop': forms.HiddenInput()}
+
+
+class ShopAddressInfoForm(forms.ModelForm):
+    class Meta:
+        model = ShopAddressInfo
+        fields = '__all__'
+        widgets = {'shop': forms.HiddenInput()}

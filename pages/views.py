@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 def home(request):
-    return render(request, 'pages/home.html')
+    return redirect('shops:catalogue')
+    #return render(request, 'pages/home.html')
 
 
 def about(request):

@@ -19,7 +19,11 @@
       <!-- NavBar -  End  -->
 
       <!-- Main Content - Start -->
-      <main role="main" class="container p-4" style="margin-bottom: 384px">
+      <main role="main" class="container p-4" style="margin-bottom: 100px">
+        <!-- Alerts - Start -->
+        {% include 'inc/alerts.html' %}
+        <!--Alerts -  End  -->
+
         {% block content %}
         Put content here!
         {% endblock %}

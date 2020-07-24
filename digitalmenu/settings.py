@@ -1,5 +1,6 @@
 import os
 from datetime import timedelta
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,7 +27,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    ## Third-Party Apps ##
+    ## Third-Party Apps
+    'crispy_forms',
     'corsheaders',
     'rest_framework',
     'graphene_django',
@@ -35,6 +37,7 @@ INSTALLED_APPS = [
     'graphql_jwt.refresh_token.apps.RefreshTokenConfig',
     ## Custom Apps ##
     'frontend',
+    'dashboard',
     'pages',
     'users',
     'shops',
@@ -77,6 +80,8 @@ GRAPHQL_JWT = {
     'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=7),
 }
 
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -92,6 +97,14 @@ TEMPLATES = [
         },
     },
 ]
+
+MESSAGE_TAGS = {
+        messages.DEBUG: 'alert-secondary',
+        messages.INFO: 'alert-info',
+        messages.SUCCESS: 'alert-success',
+        messages.WARNING: 'alert-warning',
+        messages.ERROR: 'alert-danger',
+ }
 
 WSGI_APPLICATION = 'digitalmenu.wsgi.application'
 

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="w-50 mx-auto">
+  <div class="d-flex">
+    <h3 class="d-inline">Your shops</h3>
+    <a  class="d-inline ml-auto btn btn-primary" href="{% url 'dashboard:create_shop' %}">Create shop</a>
+  </div>
+  <hr>
+
+  {% if shops %}
+  <div class="table-responsive">
+    <table class="table table-sm table-hover">
+      <thead class="thead">
+        <th scope="col">#</th>
+        <th scope="col">Shop</th>
+        <th scope="col" class="text-right">Status</th>
+        <th scope="col" class="text-center">Menus</th>
+        <th scope="col" class="text-right">Deactivate</th>
+        <th scope="col" class="text-right">Delete</th>
+      </thead>
+      <tbody>
+      {% for shop in shops %}
+        <tr>
+          <th scope="row">
+            {{ forloop.counter }}
+          </th>
+          <td>
+            <a class="d-inline"
+               href="{% url 'dashboard:update_shop' shop.slug %}">{{shop.name}}</a>
+          </td>
+          <td class="text-right">
+            {% if shop.is_active %}
+              <span>Active</span>
+            {% else %}
+              <span>Deactivated</span>
+            {% endif %}
+          </td>
+          <td class="text-right">
+            <a href="{% url 'dashboard:create_menu' shop.slug %}">Create menu</a>
+          </td>
+          <td class="text-right">
+            {% if shop.is_active %}
+              <a class="text-danger"
+                 href="{% url 'dashboard:deactivate_shop' shop.slug %}">Deactivate</a>
+            {% else %}
+              <a class="text-success"
+                 href="{% url 'dashboard:activate_shop' shop.slug %}">Activate</a>
+            {% endif %}
+          </td>
+          <td class="text-right">
+            <a class="text-danger"
+            href="{% url 'dashboard:delete_shop' shop.slug %}">Delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+    <p>You have no shops!</p>
+  {% endif %}
+</div>
+{% endblock %}

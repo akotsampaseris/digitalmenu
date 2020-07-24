@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="w-50 mx-auto">
+  <h2>Create a new shop</h2>
+  <hr>
+  <form method="post">
+    {% csrf_token %}
+    {{ form | crispy }}
+    <input type="submit" class="btn btn-primary" value="Δημιουργία">
+  </form>
+</div>
+
+{% endblock %}

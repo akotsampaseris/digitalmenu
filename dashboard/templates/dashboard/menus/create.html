@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="w-50 mx-auto">
+  <div class="d-flex">
+    <h2 class="d-inline">Create a menu</h2>
+    <a class="d-inline btn btn-primary ml-auto" href="{% url 'dashboard:view_menus' %}">View menus</a>
+  </div>
+  <hr>
+  <form method="post">
+    {% csrf_token %}
+    {{ form | crispy }}
+    <input type="submit" class="btn btn-primary" value="Create menu">
+  </form>
+</div>
+{% endblock %}

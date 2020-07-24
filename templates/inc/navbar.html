@@ -8,26 +8,32 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!--<a class="nav-item nav-link text-white" href="{% url 'shops:catalogue' %}">Catalogue</a>
       <a class="nav-item nav-link text-white" href="{% url 'pages:about' %}">About us</a>
       <a class="nav-item nav-link text-white" href="{% url 'pages:services' %}">Our Services</a>
-      <a class="nav-item nav-link text-white" href="{% url 'shops:catalogue' %}">Our Partners</a>
-      <a class="nav-item nav-link text-white" href="{% url 'pages:contact' %}">Contact</a>
+      <a class="nav-item nav-link text-white" href="{% url 'pages:contact' %}">Contact</a>-->
 
-      {% if user.is_authenticated %}
-      <div class="dropdown">
-        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{ user }}
-        </a>
-        <div class="dropdown-menu bg-primary" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item text-white" href="{% url 'users:profile' %}">Profile</a>
-          <a class="dropdown-item text-white" href="#">Settings</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item text-white" href="{% url 'users:logout' %}">Logout</a>
+      <div class="ml-auto">
+        {% if user.is_authenticated %}
+        <div class="dropdown d-inline">
+          <a class="nav-link dropdown-toggle text-white d-inline" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ user }}
+          </a>
+          <div class="dropdown-menu bg-primary" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item text-white" href="{% url 'dashboard:index' %}">Dashboard</a>
+            <a class="dropdown-item text-white" href="{% url 'dashboard:view_shops' %}">Shops</a>
+            <a class="dropdown-item text-white" href="{% url 'dashboard:view_menus' %}">Menus</a>
+            <a class="dropdown-item text-white" href="{% url 'dashboard:settings' %}">Settings</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item text-white" href="{% url 'users:logout' %}">Logout</a>
+          </div>
         </div>
+        {% else %}
+        <div class="d-inline">
+          <a class="nav-item nav-link text-white d-inline" href="{% url 'users:login' %}">Login</a>
+        </div>
+        {% endif %}
       </div>
-      {% else %}
-      <a class="nav-item nav-link text-white" href="{% url 'users:login' %}">Login</a>
-      {% endif %}
     </div>
   </div>
 </nav>

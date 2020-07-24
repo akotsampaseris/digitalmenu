@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="mx-auto" style="width: 60%;">
+  <h2>{{shop.name}}</h2>
+  <h5>{{shop.category}}</h5>
+  <div class="address">
+    <ul class="list-unstyled">
+      {% if add_info.address_1 %}
+      <li>
+        {{ add_info.address_1 }}
+      </li>
+      {% endif %}
+      {% if add_info.address_2 %}
+      <li>
+        {{ add_info.address_2 }}
+      </li>
+      {% endif %}
+      {% if add_info.city %}
+      <li>
+        {{ add_info.city }}
+      </li>
+      {% endif %}
+      {% if add_info.location or add_info.post_code %}
+      <li>
+        {{ add_info.location }}{% if add_info.location and add_info.post_code %},&nbsp{% endif %}{{ add_info.post_code }}
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+
+  <div class="social-media">
+    <ul class="list-inline">
+      {% if web_info.website %}
+      <li class="list-inline-item">
+        <a href="{{web_info.website}}" target="_blank">
+          <img src="https://cdn0.iconfinder.com/data/icons/simpline-mix/64/simpline_47-512.png"
+               alt="www"
+               width="40">
+        </a>
+      </li>
+      {% endif %}
+      {% if web_info.fb_page %}
+      <li class="list-inline-item">
+        <a href="{{web_info.fb_page}}" target="_blank">
+          <img src="https://cdn.pixabay.com/photo/2018/05/08/18/25/facebook-3383596_960_720.png"
+               alt="Facebook"
+               width="40">
+        </a>
+      </li>
+      {% endif %}
+      {% if web_info.instagram_page %}
+      <li class="list-inline-item">
+        <a href="{{web_info.instagram_page}}" target="_blank">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/600px-Instagram_icon.png"
+               alt="Instagram"
+               width="40">
+        </a>
+      </li>
+      {% endif %}
+      {% if web_info.trip_advisor_page %}
+      <li class="list-inline-item">
+        <a href="{{web_info.trip_advisor_page}}" target="_blank">
+          <img src="https://www.pngitem.com/pimgs/m/171-1715823_round-tripadvisor-icon-png-transparent-png.png"
+               alt="Trip Advisor"
+               width="40">
+        </a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+  <div class="menus">
+    <h3>Menus</h3>
+    <hr>
+    <ul class="list-inline">
+      {% for menu in menus %}
+      <li class="list-inline-item">
+        <a href="{% url 'menus:view' shop.slug menu.id %}">
+          <img src="https://i.pinimg.com/originals/fb/10/f9/fb10f954945bdc2c11a05b4097b07534.png"
+               width="200"
+               alt="{{ menu.name }}">
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

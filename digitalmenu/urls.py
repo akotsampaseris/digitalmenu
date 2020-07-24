@@ -11,8 +11,9 @@ urlpatterns = [
     path('api/', csrf_exempt(jwt_cookie(GraphQLView.as_view()))),
     # Custom Apps
     #path('', include('frontend.urls')),
+    path('dashboard/', include('dashboard.urls')),
     path('users/', include('users.urls')),
     path('', include('pages.urls')),
-    path('shops/', include('shops.urls')),
-    path('menus/', include('menus.urls')),
+    path('', include('shops.urls')),
+    path('<str:slug>/', include('menus.urls')),
 ]

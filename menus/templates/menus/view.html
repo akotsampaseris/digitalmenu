@@ -1,0 +1,20 @@
+{%extends 'base.html' %}
+
+{% block content %}
+<h2>{{shop.name}}</h2>
+<hr>
+{% if menu_categories %}
+  {% for menu_category in menu_categories %}
+    <h4>{{menu_category.name}}</h4>
+    {% if menu_items %}
+      {% for menu_item in menu_items %}
+        {% if menu_item.menu_category == menu_category %}
+          <p>{{menu_item.name}} - {{menu_item.price}}€</p>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+{% else %}
+  <p>There are no menu categories.</p>
+{% endif %}
+{% endblock %}

@@ -3,11 +3,14 @@ from django.urls import path
 from . import views
 
 app_name = 'menus'
-
 urlpatterns = [
-    path('<str:slug>/menus', views.view_shop_menus, name='view_shop_menus'),
-    path('<str:slug>/menus/<str:name>', views.view_menu, name='view_menu'),
-    path('<str:slug>/create-menu', views.create_menu, name='create_menu'),
-    path('<str:slug>/create-menu/category', views.create_menu_category, name='create_menu_category'),
-    path('<str:slug>/create-menu/item', views.create_menu_item, name='create_menu_item'),
+    path('menus', views.view_menu_list, name='view_list'),
+    path('menu/<int:id>', views.view_menu, name='view'),
+    path('menu/create', views.create_menu, name='create'),
+    path('menu/<int:menu_id>/create-category',
+            views.create_menu_category,
+            name='create_category'),
+    path('menu/<int:menu_id>/category/<int:cat_id>/create-item',
+            views.create_menu_item,
+            name='create_item'),
 ]

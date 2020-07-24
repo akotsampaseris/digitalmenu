@@ -1,36 +1,43 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 from .models import User
+from .forms import LoginForm, RegisterForm, EditUserForm
 
-from .forms import LoginForm, RegisterForm
-
-# Create your views here.
-def profile(request):
-    users = User.objects.all()
-
-    context = {
-        "users": users
-    }
-
-    return render(request, 'users/profile.html', context)
-
-
+# Create your views here.@login_required
 def registerUser(request):
+    if request.user.is_authenticated:
+        messages.warning(request, 'You are already logged in!')
+        return redirect('dashboard:index')
+
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            user = User.objects.create(email=email)
+            confirm_password = form.cleaned_data['confirm_password']
+
+            if password != confirm_password:
+                messages.error(request, 'The passwords you provided do not match!')
+                return redirect('users:register')
+
+            try:
+                user = form.save()
+            except:
+                return redirect('users:register', {"email": email})
+
             user.set_password(password)
             user.save()
-            user.authenticate(request, email=email, password=password)
+
+            # Login user after registration
+            user = authenticate(email=email, password=password)
             if user is not None:
                 login(request, user)
-            return redirect('users:profile')
+                messages.success(request, 'Welcome to DigitalMenu!')
+                return redirect('dashboard:index')
     else:
         form = RegisterForm()
 
@@ -42,17 +49,27 @@ def registerUser(request):
 
 
 def loginUser(request):
+    if request.user.is_authenticated:
+        messages.warning(request, 'You are already logged in!')
+        return redirect('dashboard:index')
+
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            user = authenticate(request, email=email, password=password)
+            user = authenticate(email=email, password=password)
             if user is not None:
-                login(request, user)
-                return redirect('users:profile')
+                if user.is_active:
+                    login(request, user)
+                    messages.success(request, 'You have logged in successfully!')
+                    return redirect('dashboard:index')
+                else:
+                    messages.error(request, 'Your account has been deactivated!')
+                    return redirect('users:login')
             else:
-                return HttpResponse('You have provided wrong credentials!')
+                messages.error(request, 'The details you provided were wrong!')
+                return redirect('users:login')
     else:
         form = LoginForm()
 
@@ -61,6 +78,7 @@ def loginUser(request):
     }
 
     return render(request, 'users/login.html', context)
+
 
 @login_required
 def logoutUser(request):
